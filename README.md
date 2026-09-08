@@ -1,17 +1,19 @@
-# Pulse — Spotify-inspired music player
+# Pulse — Music Streaming App
 
-A responsive React + Vite music streaming UI inspired by modern music players. This project uses original Pulse branding and generated visual treatments rather than Spotify proprietary assets.
+A Spotify-inspired music streaming web app built with React + Vite, with an optional Supabase backend for authentication, cloud tracks, likes, playlists and persistent data.
 
 ## Features
 
-- Responsive desktop and mobile layout
-- Home / Search / Library navigation
-- Search songs by title, artist, or album
-- Functional play/pause state and track selection
-- Recently played and personalized-style sections
-- Liked-song interaction
-- Progress, volume, shuffle, repeat and player controls UI
-- Clean component structure with React and Lucide icons
+- Responsive music streaming UI
+- Search across tracks, artists and albums
+- Browser audio playback for tracks with an `audio_url`
+- Play / pause / previous / next / seek / volume controls
+- Authentication with Supabase email/password
+- Persistent sessions
+- Cloud track catalogue
+- Like/unlike tracks when signed in
+- Database schema for profiles, playlists, playlist tracks and likes
+- Demo mode works without a backend
 
 ## Run locally
 
@@ -20,8 +22,28 @@ npm install
 npm run dev
 ```
 
-Then open the local Vite URL shown in the terminal.
+## Enable the backend
 
-## Notes
+1. Create a Supabase project.
+2. Open the Supabase SQL Editor and run [`supabase/schema.sql`](./supabase/schema.sql).
+3. Copy `.env.example` to `.env.local`.
+4. Add your Supabase project URL and publishable key to `.env.local`.
+5. Restart the Vite development server.
 
-The repository is a front-end clone-style project. It does not include Spotify's proprietary code, branding, artwork, or copyrighted music. To turn it into a full streaming product, connect the UI to music you have the rights to use and a suitable backend/API.
+Never commit `.env.local` or private server keys. Only the Supabase publishable/anon client key belongs in a browser application.
+
+## Adding real music
+
+Insert your own or properly licensed audio into `public.tracks` with an accessible `audio_url`. You can also provide `cover_url`. The app will automatically use those records when the database contains tracks.
+
+Do not upload copyrighted music unless you have the necessary rights or permission.
+
+## Deploy
+
+The project can be deployed to a static hosting service that supports Vite. Add the same `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` environment variables in the hosting provider's project settings.
+
+## Tech stack
+
+React · Vite · Supabase · Lucide React
+
+This project uses original Pulse branding and does not include Spotify proprietary code or assets.
